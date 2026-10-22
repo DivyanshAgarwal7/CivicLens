@@ -1,0 +1,28 @@
+Phase 6 focused patch excerpt
+VCS metadata is unavailable; this is a truthful focused before/after patch for the Phase 6 changes.
+
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ backend job
++      - run: python -m pip install pip-audit
++      - run: pip-audit -r requirements.txt
+@@ frontend job
++      - run: npm audit --audit-level=high
+
+--- a/docs/RELEASE_ACCEPTANCE.md
++++ b/docs/RELEASE_ACCEPTANCE.md
+@@ acceptance decision
++The Phase 6 validation reran the available gates and records the current blocker evidence in docs/PHASE6_VALIDATION.md.
+
+--- a/docs/IMPLEMENTATION_PLAN.md
++++ b/docs/IMPLEMENTATION_PLAN.md
+@@ Phase 6 checklist
++Reconfirmed available gates, documented blockers, and added network-enabled dependency scan steps.
+
+--- /dev/null
++++ b/docs/PHASE6_VALIDATION.md
++Added blocker matrix, exact commands, actual results, prerequisites, risks, and unblock procedure.
+
+--- /dev/null
++++ b/docs/PHASE6_DELIVERY_MANIFEST.md
++Added changed-file manifest and verification summary.

@@ -1,0 +1,10 @@
+Phase 8 focused patch
+
+1. Added optional authenticated viewer lookup for public verification reads.
+2. Added public verification serializer that excludes citizen_id and citizen_trust_score.
+3. Added verified_by_current_user response field for the authenticated viewer.
+4. Updated frontend Verification type and duplicate-verification detection.
+5. Added regression coverage for verifier identity/trust-score privacy.
+6. Added FINAL_DEMO_RELEASE.md and FINAL_AUDIT_REPORT.md.
+
+No Git diff is available: this workspace is not a Git repository.

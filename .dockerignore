@@ -1,0 +1,27 @@
+# Repository metadata and release artifacts
+.git/
+.github/
+*.zip
+
+# Secrets and local configuration
+**/.env
+**/.env.*
+!backend/.env.example
+
+# Local data and uploads
+backend/data/
+backend/uploads/
+
+# Reproducible dependencies, caches, and build output
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+**/__pycache__/
+**/.pytest_cache/
+**/*.py[cod]
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Deep pothole near the bus stop",
+    "description": "A deep pothole is damaging vehicles beside the Kothrud bus stop.",
+    "category": "Pothole",
+    "latitude": 18.5175,
+    "longitude": 73.8152,
+    "existing": {"issue_id": "SYN-001", "title": "Large pothole by Kothrud bus stop", "description": "Vehicles are hitting a large road hole at the same bus stop.", "category": "Pothole", "location": {"latitude": 18.5176, "longitude": 73.8153}, "status": "Reported"},
+    "label": true
+  },
+  {
+    "title": "Street lamp not working",
+    "description": "The road is dark because the lamp outside the clinic is broken.",
+    "category": "Damaged Streetlight",
+    "latitude": 18.52,
+    "longitude": 73.81,
+    "existing": {"issue_id": "SYN-002", "title": "Broken illumination near clinic", "description": "The light fixture outside the medical clinic has stopped working.", "category": "Damaged Streetlight", "location": {"latitude": 18.5201, "longitude": 73.8101}, "status": "Reported"},
+    "label": true
+  },
+  {
+    "title": "Garbage pile on the footpath",
+    "description": "Waste bags are blocking pedestrians near the market.",
+    "category": "Garbage Accumulation",
+    "latitude": 18.53,
+    "longitude": 73.82,
+    "existing": {"issue_id": "SYN-003", "title": "Garbage collection missed", "description": "The market bins were not emptied this morning.", "category": "Garbage Accumulation", "location": {"latitude": 18.5301, "longitude": 73.8201}, "status": "Reported"},
+    "label": false
+  },
+  {
+    "title": "Water pipe leak",
+    "description": "Water is flooding the lane beside the school.",
+    "category": "Water Leakage",
+    "latitude": 18.50,
+    "longitude": 73.80,
+    "existing": {"issue_id": "SYN-004", "title": "Water leakage at school lane", "description": "A broken pipe is flooding the lane beside the school.", "category": "Water Leakage", "location": {"latitude": 19.50, "longitude": 74.80}, "status": "Reported"},
+    "label": false
+  },
+  {
+    "title": "Blocked drain after rain",
+    "description": "The drain is overflowing near the apartment gate.",
+    "category": "Drainage Problem",
+    "latitude": null,
+    "longitude": null,
+    "existing": {"issue_id": "SYN-005", "title": "Overflowing drain at apartment entrance", "description": "Rainwater cannot leave because the drain is blocked at the gate.", "category": "Drainage Problem", "status": "Reported"},
+    "label": true
+  }
+]

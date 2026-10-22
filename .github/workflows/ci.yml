@@ -1,0 +1,44 @@
+name: CivicLens CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    env:
+      APP_ENV: test
+      ALLOW_JSON_DB: "true"
+      JWT_SECRET: ci-only-secret-value-123456789012
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -r ../requirements.txt
+      - run: python -m pip install pip-audit
+      - run: python -m compileall -q .
+      - run: python -m pytest -q
+      - run: python evaluation/evaluate_ai.py
+      - run: pip-audit -r ../requirements.txt
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run build
+      - run: npm audit --audit-level=high

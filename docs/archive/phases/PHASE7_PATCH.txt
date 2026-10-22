@@ -1,0 +1,31 @@
+Phase 7 focused patch excerpt
+VCS metadata is unavailable; this records the actual Phase 7 before/after changes.
+
+--- a/backend/Dockerfile
++++ b/backend/Dockerfile
+@@ dependency source
+-COPY backend/requirements.txt /app/backend/requirements.txt
+-RUN pip install --no-cache-dir -r /app/backend/requirements.txt
++COPY requirements.txt /app/requirements.txt
++RUN pip install --no-cache-dir -r /app/requirements.txt
+
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ backend install/audit paths
+-      - run: pip install -r requirements.txt
+-      - run: pip-audit -r requirements.txt
++      - run: pip install -r ../requirements.txt
++      - run: pip-audit -r ../requirements.txt
+
+--- a/README.md
++++ b/README.md
+@@ handover
++Added verified runtime prerequisites, local URLs, JSON demo mode, portability/demo links, and removed seeded passwords from the documented table.
+
+--- /dev/null
++++ b/docs/DEMO_SCRIPT.md
++Added role-aware Citizen → Officer → Engineer → Administrator demonstration steps.
+
+--- /dev/null
++++ b/docs/PORTABILITY_CHECKLIST.md
++Added setup, environment, runtime, reset, model, troubleshooting, and verification checklist.
