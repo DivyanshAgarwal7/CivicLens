@@ -189,7 +189,6 @@ AI output is advisory. Issue persistence and workflow integrity must not depend 
     backend/evaluation/      AI evaluation and performance checks
     backend/seed_data.py     Local-only development seed data
     frontend/src/            React application source
-    docs/                    Deployment, testing, security, workflow, and release records
     .github/workflows/ci.yml CI checks
     test_civiclens_selenium.py Browser-level workflow tests
     docker-compose.yml       MongoDB, backend, and frontend deployment stack
@@ -220,18 +219,7 @@ Check /uploads, the Vite proxy, upload-directory permissions, map/network permis
 - Do not commit secrets or generated user data.
 - Do not expose Swagger or database administration interfaces publicly without access controls.
 - Use HTTPS, secret storage, restrictive CORS, authenticated databases, backups, monitoring, and incident procedures in production.
-- Review docs/PRODUCTION_SECURITY_REVIEW.md, docs/SECURITY_REVIEW.md, and docs/DEPLOYMENT_GUIDE.md before release.
 - Report suspected vulnerabilities privately to the repository owner.
-
-## Documentation
-
-- docs/DEMO_SCRIPT.md — Citizen to Officer to Engineer demonstration flow.
-- docs/TESTING_GUIDE.md — test strategy and release checks.
-- docs/DEPLOYMENT_GUIDE.md — deployment and environment guidance.
-- docs/PORTABILITY_CHECKLIST.md — reproducible setup.
-- docs/ISSUE_WORKFLOW.md — business workflow and status rules.
-- docs/PRODUCTION_SECURITY_REVIEW.md — production security review.
-- docs/RELEASE_ACCEPTANCE.md — release acceptance criteria.
 
 ## Contributing
 
