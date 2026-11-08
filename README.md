@@ -34,16 +34,102 @@ CivicLens supports the workflow from citizen report submission through duplicate
 
 ## Architecture
 
-    Browser: React 19 + TypeScript + Vite + Tailwind CSS + Leaflet
-             | /api and /uploads
-             v
-    FastAPI + Uvicorn: JWT, RBAC, issue workflow, AI, notifications
-             |
-             +--> MongoDB / MongoDB Atlas for staging and production
-             +--> Explicit JSON store for local development/test only
-             +--> Optional Gemini, Cloudinary, SMTP, and sentence-transformers
+CivicLens uses a layered client-server architecture. The frontend is a JavaScript/JSX React application, while the backend exposes a FastAPI REST API and owns authentication, authorization, validation, workflows, persistence, and integrations.
 
-The Vite development server proxies /api and /uploads to http://127.0.0.1:8000. Production serves the compiled frontend through Nginx and runs the backend separately.
+```mermaid
+flowchart TB
+    User[Citizen / Municipal Officer / Field Engineer / Administrator]
+
+    subgraph Frontend["Frontend - React + Vite"]
+        UI[React screens and shared components]
+        Client[API client]
+        Map[Leaflet map]
+        Session[Browser session storage]
+    end
+
+    subgraph Backend["Backend - FastAPI + Uvicorn"]
+        Auth[JWT authentication and role checks]
+        Routes[REST API routers]
+        Validation[Pydantic request validation]
+        Workflow[Issue workflow and business rules]
+        Uploads[Image upload validation]
+        AI[Duplicate detection and priority recommendation]
+        Notify[Notifications and email logging]
+        Audit[Audit logging and analytics]
+    end
+
+    subgraph Data["Persistence"]
+        Mongo[(MongoDB)]
+        Json[(Local JSON store)]
+        Files[(Upload storage)]
+    end
+
+    subgraph Optional["Optional integrations"]
+        Gemini[Google Gemini]
+        Embeddings[Sentence Transformers]
+        SMTP[SMTP server]
+        Cloudinary[Cloudinary]
+    end
+
+    User --> UI
+    UI --> Client
+    UI --> Map
+    Client --> Session
+    Client -->|/api and /uploads| Routes
+    Routes --> Auth
+    Routes --> Validation
+    Routes --> Workflow
+    Routes --> Uploads
+    Workflow --> AI
+    Workflow --> Notify
+    Workflow --> Audit
+    Auth --> Mongo
+    Auth --> Json
+    Workflow --> Mongo
+    Workflow --> Json
+    Uploads --> Files
+    AI -. optional .-> Gemini
+    AI -. optional .-> Embeddings
+    Notify -. optional .-> SMTP
+    Uploads -. optional .-> Cloudinary
+```
+
+### Main layers
+
+- **Frontend:** React screens for citizens, officers, engineers, and administrators; shared navigation, maps, image handling, notifications, and API access in `frontend/src/`.
+- **API layer:** FastAPI routers for authentication, issues, verification, officer operations, engineer operations, analytics, administration, and notifications.
+- **Security layer:** JWT access tokens, bcrypt password hashing, Pydantic validation, role-based dependencies, CORS configuration, upload checks, and response filtering.
+- **Business layer:** Issue reporting, duplicate detection, AI priority recommendation, officer review, department assignment, engineer resolution, community verification, and audit events.
+- **Persistence layer:** MongoDB/MongoDB Atlas for production; an explicit JSON adapter under `backend/data/` for local development and tests.
+- **Integration layer:** Optional Gemini vision/priority analysis, sentence-transformer embeddings, Cloudinary storage, and SMTP delivery.
+
+### Issue lifecycle
+
+```text
+Citizen report
+    -> request and image validation
+    -> duplicate detection and priority recommendation
+    -> officer priority review
+    -> department and engineer assignment
+    -> engineer progress and resolution evidence
+    -> community verification and notifications
+    -> audit history and analytics
+```
+
+### Production topology
+
+```text
+Browser
+  -> Nginx frontend container
+       -> compiled React assets
+       -> /api and /uploads proxy
+            -> FastAPI backend container
+                 -> MongoDB container or managed MongoDB
+                 -> persistent uploads
+                 -> optional AI, SMTP, and Cloudinary services
+```
+
+The Vite development server proxies `/api` and `/uploads` to `http://127.0.0.1:8000`. Docker Compose uses Nginx for the frontend, FastAPI for the backend, and MongoDB for production persistence.
 
 ## Prerequisites
 
